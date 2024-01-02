@@ -1,0 +1,9 @@
+<div id="login-form">
+    <h3><b>Administrator login</b></h3>
+    <mat-form-field appearance="fill">
+        <mat-label>Enter Security Code</mat-label>
+        <input matInput name="SecurityCode" type="password" [(ngModel)]="pass" placeholder="Code">
+    </mat-form-field>
+    <button mat-button color="accent" (click)="valid()">Submit</button>
+    <h3><b>Only for administrators login</b> <a routerLink=""><b> Click here </b></a><b>to redirect to homepage...!!!</b></h3>
+</div>

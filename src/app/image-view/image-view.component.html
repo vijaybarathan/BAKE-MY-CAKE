@@ -1,0 +1,138 @@
+<div style="display: flex;margin-top: 5%;">
+  <section id="card">
+    <mat-card style="height: 450px; text-align: center;">
+      <mat-card-header><img style="width:100%; height: 300px;" src="../../assets/{{Cake.cakename}}.jpg">
+      </mat-card-header>
+
+      <mat-card-content class="contant">
+        <h2>{{Cake.cakename}}</h2>
+        <p>{{Cake.details}}</p>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <section style="width: 40%;height: auto;">
+    <form id="cake-request" (ngSubmit)="makeRequest()" #customerform="ngForm">
+      <div class="order">
+        <h1>Ordering Cost Details <mat-icon>shopping_basket</mat-icon></h1>
+        <h2>{{ Cake.price | currency:"INR"}} <span id="per-item">Per Piece<mat-icon>payment</mat-icon> </span></h2>
+      </div>
+
+      <mat-form-field appearance="fill" style="width: 37%;margin-right: 6%;margin-bottom: 3%;">
+        <mat-label>Quantity</mat-label>
+        <input matInput type="number" required placeholder="quantity" name="quantity" #quantity="ngModel"
+          [(ngModel)]="Customerrequest.quantity" pattern="[1-9][0-9]{0,8}">
+        <mat-error *ngIf="quantity.errors?.['required']">
+          Quantity cannot be zero
+        </mat-error>
+        <mat-error *ngIf="quantity.errors?.['pattern']">
+          Quantity cannot be zero or negative number
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 37%;">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="Customerrequest.DateOfOrder" [min]="minDate"
+          [max]="maxDate" required name="deliveryDate" #deliveryDate="ngModel">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+
+        <mat-error *ngIf="deliveryDate.errors?.['required']">Delivery date is required</mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" required placeholder="Name" name="Name" #Name="ngModel"
+          [(ngModel)]="Customerrequest.Name" pattern="^[a-zA-Z \-\']+" minlength="3">
+        <mat-error *ngIf="Name.errors?.['required']">
+          User Name is required
+        </mat-error>
+        <mat-error *ngIf="Name.errors?.['minlength']">
+          Invalid User Name...
+        </mat-error>
+        <mat-error *ngIf="Name.errors?.['pattern']">
+          User Name must be alphabet
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" matInput [(ngModel)]="Customerrequest.Email" name="email" #email="ngModel" required
+          pattern=^[a-zA-Z]+[a-zA-Z0-9.%+-]*@[a-zA-Z]+[a-zA-Z0-9.%+-]*\.[a-zA-Z]{2,4}$>
+
+        <mat-error *ngIf="email.errors?.['required']">Email id is required</mat-error>
+        <mat-error *ngIf="email.errors?.['pattern']">Enter valid email id</mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Phone no.</mat-label>
+        <input matInput type="phone" required pattern="^[7-9][0-9]{9}$" maxlength="10" placeholder="Phone" name="Phone"
+          #Phone="ngModel" [(ngModel)]=" Customerrequest.Phone">
+        <mat-error *ngIf="Phone.errors?.['required']">
+          Phone Number is required
+        </mat-error>
+        <mat-error *ngIf="Phone.errors?.['pattern']">
+          Enter valid phone number containing 10 digits starting with 7/8/9
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Address:</mat-label>
+        <input matInput placeholder="Address line" required name="address" #Address="ngModel"
+          [(ngModel)]=" Customerrequest.Address">
+        <mat-error *ngIf="Address.errors?.['required']">
+          Address is required
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field appearance="fill" style="width: 37%;margin-right: 6%;">
+        <mat-label>city:</mat-label>
+        <input matInput placeholder="City" required name="city" #city="ngModel" [(ngModel)]="Customerrequest.city"
+          pattern="^[a-zA-Z \-\']+">
+        <mat-error *ngIf="city.errors?.['required']">
+          City is required
+        </mat-error>
+        <mat-error *ngIf="city.errors?.['pattern']">
+          City name cannot be number
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="fill" style="width: 37%;">
+        <mat-label>State:</mat-label>
+        <input matInput placeholder="state" required name="state" #state="ngModel" [(ngModel)]="Customerrequest.state"
+          pattern="^[a-zA-Z \-\']+">
+        <mat-error *ngIf="state.errors?.['required']">
+          State is required
+        </mat-error>
+        <mat-error *ngIf="state.errors?.['pattern']">
+          State name cannot be number
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Zipcode:</mat-label>
+        <input matInput placeholder="zipcode" required name="zipcode" #zipcode="ngModel"
+          [(ngModel)]="Customerrequest.zipcode" minlength="5" maxlength="6">
+        <mat-error *ngIf="zipcode.errors?.['required']">
+          zipcode is required
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <button type="submit" [disabled]="!customerform.valid" mat-flat-button color="accent">Make Request</button>
+    </form>
+  </section>

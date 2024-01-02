@@ -1,0 +1,24 @@
+<div id="search">
+      <app-search (searchEvent)="onSearch($event)"></app-search>
+</div>
+
+<div id="category">
+      <app-category (category)="display($event)"></app-category>
+</div>
+
+<div style="display: flex;flex-wrap: wrap; margin-bottom: 3%;">
+      <mat-card class="images" *ngFor="let product of product">
+            <mat-card-header><img src="../../assets/{{product.cakename}}.jpg"> </mat-card-header>
+
+            <mat-card-content class="contant">
+                  <p>{{product.cakename}}</p>
+                  <h2>{{product.price | currency:"INR"}}</h2>
+                  <h2>{{product.category}}</h2>
+
+                  <mat-icon routerLink="{{product.id}}" class="cart-icon" color="primary"
+                        matTooltip="add to cart">shopping_cart</mat-icon>
+            </mat-card-content>
+      </mat-card>
+</div>
+
+<app-footer></app-footer>

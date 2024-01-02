@@ -1,0 +1,12 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+
+<div class="container-fluid">
+    <h1>{{title}}<mat-icon>cake</mat-icon></h1>
+
+    <button mat-icon-button style="margin-left: auto;margin-right: 10px;" routerLink="/cake"
+        class="icon"><mat-icon>home</mat-icon></button>
+    <button mat-icon-button style="margin-right: 10px;" routerLink="/login" class="icon"
+        *ngIf="!log.status"><mat-icon>login</mat-icon></button>
+    <button mat-icon-button (click)="status()" style="margin-right: 10px;" routerLink="/login" class="icon"
+        *ngIf="log.status"><mat-icon>logout</mat-icon></button>
+</div>
